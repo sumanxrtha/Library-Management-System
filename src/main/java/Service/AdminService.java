@@ -3,6 +3,7 @@ package Service;
 import DBConnection.DBConnection;
 import Model.Admin;
 import Model.Librarian;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,13 +17,13 @@ public class AdminService {
         String query = "select * from admin where adminUsername=? and adminPass=?";
 
         PreparedStatement pstm = new DBConnection().getStatement(query);
-        System.out.println(username +" "+password);
+        System.out.println(username + " " + password);
         try {
             pstm.setString(1, username);
             pstm.setString(2, password);
 
             ResultSet rs = pstm.executeQuery();
-            System.out.println(username +" "+ password);
+            System.out.println(username + " " + password);
             while (rs.next()) {
                 admin = new Admin();
                 admin.setAdminId(rs.getInt("adminId"));
@@ -41,6 +42,7 @@ public class AdminService {
 
         return admin;
     }
+
     public void insertAdmin(Admin admin) {
         String query = "insert into admin (adminName,adminMob,adminEmail,adminUsername,adminPass)" +
                 "values(?,?,?,?,?)";
@@ -57,6 +59,26 @@ public class AdminService {
             e.printStackTrace();
         }
     }
+
+    public int insertOnce() throws SQLException {
+        String check = "select * from admin";
+        PreparedStatement pst = new DBConnection().getStatement(check);
+        ResultSet rs = pst.executeQuery();
+
+        int id = 0;
+
+        while(rs.next()){
+            id = rs.getInt("adminId");
+            System.out.println(id);
+
+        }
+
+
+        System.out.println(id);
+        return id;
+
+    }
+
     public void insertLibrarian(Librarian librarian) {
         String query = "insert into librarian (librarianName,librarianMob,librarianEmail,librarianUsername,librarianPass)" +
                 "values(?,?,?,?,?)";

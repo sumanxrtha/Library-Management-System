@@ -12,21 +12,21 @@ import java.io.IOException;
 public class TeacherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("page");
         System.out.println(action);
-
+        System.out.println("welcome to teacher controller");
         if (action.equalsIgnoreCase("teacher")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             System.out.println(username + " " + password + " ");
             TeacherService ss = new TeacherService();
             Teacher teacher = ss.getUser(username, password);
-//            System.out.println(user.getUsername()+" "+user.getPassword());
+            //System.out.println(teacher.getTeacherUsername()+" "+teacher.getTeacherPass());
             if (teacher != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("teacher", teacher);
@@ -35,7 +35,7 @@ public class TeacherServlet extends HttpServlet {
                 System.out.println(request.getAttribute("msg"));
 //                session.setAttribute("page", "dashboard" );
 
-                RequestDispatcher rd = request.getRequestDispatcher("WebPages/teacher.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("WebPages/Dashboard/teacher.jsp");
                 rd.forward(request, response);
             } else {
                 request.setAttribute("msg", "Invalid username or password");

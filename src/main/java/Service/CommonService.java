@@ -3,9 +3,12 @@ package Service;
 import DBConnection.DBConnection;
 import Model.*;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +81,25 @@ public class CommonService {
                 user.setFaculty(rs.getString("faculty"));
                 user.setStudentRoll(rs.getInt("studentRoll"));
                 user.setSemester(rs.getInt("semester"));
+                user.setAdmissionDate(rs.getDate("AdmissionDate"));
+
+//                Date dat = rs.getDate("AdmissionDate"));
+//                String date = String.valueOf(dat);
+//                user.setAdmissionDate(date);
+
+//                System.out.println(user.getAdmissionDate());
+
+//                java.sql.Date adDate=null;
+//                try {
+//                    java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(rs.getDate("AdmissionDate")));
+//                    System.out.println(date);
+//                    adDate = new java.sql.Date(date.getTime());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(adDate);
+//               user.setAdmissionDate(adDate);
+
                 user.setRegularBook(rs.getInt("regularBook"));
                 user.setExtraBook(rs.getInt("extraBook"));
                 user.setFine(rs.getInt("fine"));

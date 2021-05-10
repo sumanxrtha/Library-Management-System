@@ -40,7 +40,7 @@ public class StudentServlet extends HttpServlet {
                 System.out.println(request.getAttribute("msg"));
 //                session.setAttribute("page", "dashboard" );
 
-                RequestDispatcher rd = request.getRequestDispatcher("WebPages/student.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("WebPages/Dashboard/student.jsp");
                 rd.forward(request, response);
             } else {
                 request.setAttribute("msg", "Invalid username or password");
@@ -103,5 +103,6 @@ for date parser
             RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/studentregister.jsp");
             rd.forward(request, response);
         }
+
     }
 }

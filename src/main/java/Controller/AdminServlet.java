@@ -3,14 +3,15 @@ package Controller;
 import Model.*;
 import Service.AdminService;
 import Service.CommonService;
-import Service.LibrarianService;
-import Service.StudentService;
+import jdk.nashorn.internal.ir.RuntimeNode;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+
+import static com.sun.xml.internal.ws.api.message.Packet.Status.Request;
 
 @WebServlet(name = "AdminServlet", value = "/AdminServlet")
 public class AdminServlet extends HttpServlet {
@@ -37,7 +38,7 @@ public class AdminServlet extends HttpServlet {
                 //                    System.out.println(session.getAttribute("user"));
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
-                session.setAttribute("user", "admin" );
+                session.setAttribute("user", "admin");
 
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/Dashboard/admin.jsp");
                 rd.forward(request, response);
@@ -56,20 +57,43 @@ public class AdminServlet extends HttpServlet {
             admin.setAdminUsername(request.getParameter("username"));
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
-            if(pass.equals(cpass))  {
+            if (pass.equals(cpass)) {
                 admin.setAdminPass(pass);
-            }else{
+            } else {
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/adminregister.jsp");
                 rd.forward(request, response);
             }
+            new AdminService().insertAdmin(admin);
+                RequestDispatcher rd = request.getRequestDispatcher("WebPages/Dashboard/admin.jsp");
+                rd.forward(request, response);
 
+        }
+        if (action.equalsIgnoreCase("oregister")) {
+            Admin admin = new Admin();
+            System.out.println(request.getParameter("name"));
+
+            admin.setAdminName(request.getParameter("name"));
+            admin.setAdminMob(Integer.parseInt(request.getParameter("phone")));
+            admin.setAdminEmail(request.getParameter("email"));
+            admin.setAdminUsername(request.getParameter("username"));
+            String pass = request.getParameter("password");
+            String cpass = request.getParameter("cpassword");
+            if (pass.equals(cpass)) {
+                admin.setAdminPass(pass);
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/adminregister.jsp");
+                rd.forward(request, response);
+            }
             new AdminService().insertAdmin(admin);
             RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
+
         }
+
         if (action.equalsIgnoreCase("lregister")) {
             Librarian librarian = new Librarian();
             System.out.println(request.getParameter("name"));
+
             librarian.setLibrarianName(request.getParameter("name"));
             librarian.setLibrarianMob(Integer.parseInt(request.getParameter("phone")));
             librarian.setLibrarianEmail(request.getParameter("email"));
@@ -77,19 +101,38 @@ public class AdminServlet extends HttpServlet {
 
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
-            if(pass.equals(cpass))  {
+            if (pass.equals(cpass)) {
                 librarian.setLibrarianPass(pass);
-            }else{
+            } else {
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/librarianregister.jsp");
                 rd.forward(request, response);
             }
             new AdminService().insertLibrarian(librarian);
-            RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("WebPages/Dashboard/admin.jsp");
             rd.forward(request, response);
         }
         if (action.equalsIgnoreCase("newAdmin")) {
+            request.setAttribute("from", "newadmin");
             RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/adminregister.jsp");
             rd.forward(request, response);
+        }
+        if (action.equalsIgnoreCase("OnceAdmin")) {
+            try {
+                int id = new AdminService().insertOnce();
+                RequestDispatcher rd;
+                if (id == 0) {
+                    rd = request.getRequestDispatcher("WebPages/RegisterPages/OnceAdmin.jsp");
+                    rd.forward(request, response);
+                } else {
+                    rd = request.getRequestDispatcher("index.jsp");
+                    rd.forward(request, response);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
         }
         if (action.equalsIgnoreCase("newLibrarian")) {
             RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/librarianregister.jsp");
@@ -137,10 +180,10 @@ public class AdminServlet extends HttpServlet {
             rd.forward(request, response);
         }
         if (action.equalsIgnoreCase("listStudent")) {
-            Student user = new Student();
+           // Student user = new Student();
             List<Student> userList = new CommonService().getStudentList();
             request.setAttribute("studentList", userList);
-            request.setAttribute("student", user);
+            //request.setAttribute("student", user);
             RequestDispatcher rd = request.getRequestDispatcher("WebPages/List/studentList.jsp");
             rd.forward(request, response);
         }

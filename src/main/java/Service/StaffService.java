@@ -3,6 +3,7 @@ package Service;
 import DBConnection.DBConnection;
 import Model.Staff;
 import Model.Staff;
+import Model.Student;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +32,7 @@ public class StaffService {
                 staff.setStaffUsername(rs.getString("staffUsername"));
                 staff.setStaffPass(rs.getString("staffPass"));
                 staff.setTotalBook(rs.getInt("totalBook"));
+                staff.setFine(rs.getInt("fine"));
 
 
                 System.out.println(staff.getStaffUsername() + " " + staff.getStaffPass());
@@ -41,6 +43,7 @@ public class StaffService {
 
         return staff;
     }
+
     public void insertStaff(Staff staff) {
         String query = "insert into staff (staffName,staffMob,staffEmail,staffUsername,staffPass)" +
                 "values(?,?,?,?,?)";

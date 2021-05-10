@@ -12,36 +12,38 @@ import java.io.IOException;
 public class StaffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("page");
         System.out.println(action);
+        System.out.println("i am at "+ action);
 
-        if (action.equalsIgnoreCase("staff")) {
+        if (action.equalsIgnoreCase("loginStaff")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             System.out.println(username + " " + password + " ");
+            System.out.println("this is staff");
+
             StaffService ss = new StaffService();
             Staff staff = ss.getUser(username, password);
-//            System.out.println(user.getUsername()+" "+user.getPassword());
             if (staff != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("staff", staff);
                 //                    System.out.println(session.getAttribute("user"));
                 request.setAttribute("msg", "Login Successful!");
                 System.out.println(request.getAttribute("msg"));
-//                session.setAttribute("page", "dashboard" );
 
-                RequestDispatcher rd = request.getRequestDispatcher("WebPages/staff.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("WebPages/Dashboard/staff.jsp");
                 rd.forward(request, response);
             } else {
                 request.setAttribute("msg", "Invalid username or password");
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
             }
+
         }
         if (action.equalsIgnoreCase("register")) {
             Staff staff = new Staff();
@@ -66,7 +68,7 @@ public class StaffServlet extends HttpServlet {
         }
         if (action.equalsIgnoreCase("newStaff")) {
             System.out.println("i am in newStaff");
-            RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/staffregister.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/staffregistration.jsp");
             rd.forward(request, response);
         }
     }

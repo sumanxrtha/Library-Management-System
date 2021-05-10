@@ -56,7 +56,7 @@
         </form>
 
         <form id="other" class="input-group" action="staff" method="post">
-            <input type="hidden" name="page" value="other">
+            <input type="hidden" name="staffpage" value="loginStaff">
             <input type="text" class="input-field" name="username" placeholder="Staff's User Name" required>
             <input type="password" class="input-field" name="password" placeholder="Enter Password" required>
 
@@ -77,6 +77,7 @@
             <label>Remember Password</label><br>
 
             <button type="submit" class="submit-btn">Log  in</button>
+            <a href="admin?page=OnceAdmin" class="link-btn">Not a Member yet? Register</a>
         </form>
     </div>
 </div>

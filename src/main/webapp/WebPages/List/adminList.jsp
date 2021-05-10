@@ -21,6 +21,7 @@
     <%@include file="../NavBar/adNav.jsp" %>
     <div class="container">
         <div class="table-responsive">
+            <a href="admin?page=newAdmin">Add Admin</a>
             <table class="table">
                 <tr>
                     <th>Name</th>
