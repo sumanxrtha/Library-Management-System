@@ -57,11 +57,15 @@
 <%--                            out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");--%>
 <%--                        %>--%>
 
-                        <jsp:useBean id="date" class="java.util.Date"/>
-<%--                        <td> ${user.AdmissionDate} type="date" pattern="dd-MMM-yyyy"</td>--%>
+<%--                        <jsp:useBean id="date" class="java.util.Date"/>
 
-                       <td> <fmt:formatDate value="${user.AdmissionDate}" type="date" pattern="yyyy-MM-dd"/></td>
-<%--                        <td>${user.AdmissionDate}.toString</td>--%>
+
+                       <td> <fmt:formatDate value="${user.AdmissionDate}" type="date" pattern="yyyy-MM-dd"/></td>--%>
+
+<%--                        <td><jsp:useBean id="date" class="java.util.Date"/>--%>
+<%--                         <fmt:formatDate value="${user.AdmissionDate}" type="date" pattern="yyyy-MM-dd"/></td>--%>
+
+                        <td>${user.ad}</td>
                         <td>${user.regularBook}</td>
                         <td>${user.extraBook}</td>
                         <td>${user.fine}</td>

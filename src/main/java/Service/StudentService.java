@@ -57,7 +57,7 @@ public class StudentService {
             pstm.setString(6, student.getStudentPass());
             pstm.setInt(7, student.getStudentRoll());
             pstm.setInt(8, student.getSemester());
-            pstm.setDate(9, student.getAdmissionDate());
+            pstm.setString(9, student.getAdmissionDate());
 
             pstm.execute();
         } catch (SQLException e) {

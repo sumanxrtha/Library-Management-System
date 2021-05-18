@@ -1,5 +1,6 @@
 package Controller;
 
+import Hashing.HashingPassword;
 import Model.*;
 import Service.AdminService;
 import Service.CommonService;
@@ -58,7 +59,7 @@ public class AdminServlet extends HttpServlet {
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
             if (pass.equals(cpass)) {
-                admin.setAdminPass(pass);
+                admin.setAdminPass(HashingPassword.hashPassword(pass));
             } else {
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/adminregister.jsp");
                 rd.forward(request, response);
@@ -79,7 +80,7 @@ public class AdminServlet extends HttpServlet {
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
             if (pass.equals(cpass)) {
-                admin.setAdminPass(pass);
+                admin.setAdminPass(HashingPassword.hashPassword(pass));
             } else {
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/adminregister.jsp");
                 rd.forward(request, response);
@@ -102,7 +103,7 @@ public class AdminServlet extends HttpServlet {
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
             if (pass.equals(cpass)) {
-                librarian.setLibrarianPass(pass);
+                librarian.setLibrarianPass(HashingPassword.hashPassword(pass));
             } else {
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/librarianregister.jsp");
                 rd.forward(request, response);

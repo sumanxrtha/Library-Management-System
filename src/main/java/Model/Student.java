@@ -13,11 +13,28 @@ public class Student {
     private int studentRoll;
     private int semester;
     private Date AdmissionDate;
+    private String ad;
     private int regularBook;  //making 2 tables for it where keeping book id and student id
     private int extraBook;
     private int fine;
 
     public Student() {
+    }
+
+    public String getAdmissionDate() {
+        return String.valueOf(AdmissionDate);
+    }
+
+    public void setAdmissionDate(Date admissionDate) {
+        this.AdmissionDate = admissionDate;
+    }
+
+    public String getAd() {
+        return ad;
+    }
+
+    public void setAd(String ad) {
+        this.ad = ad;
     }
 
     public int getStudentRoll() {
@@ -26,14 +43,6 @@ public class Student {
 
     public void setStudentRoll(int studentRoll) {
         this.studentRoll = studentRoll;
-    }
-
-    public Date getAdmissionDate() {
-        return AdmissionDate;
-    }
-
-    public void setAdmissionDate(Date admissionDate) {
-        AdmissionDate = admissionDate;
     }
 
     public int getStudentId() {

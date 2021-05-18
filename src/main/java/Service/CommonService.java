@@ -2,13 +2,9 @@ package Service;
 
 import DBConnection.DBConnection;
 import Model.*;
-
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +77,7 @@ public class CommonService {
                 user.setFaculty(rs.getString("faculty"));
                 user.setStudentRoll(rs.getInt("studentRoll"));
                 user.setSemester(rs.getInt("semester"));
-                user.setAdmissionDate(rs.getDate("AdmissionDate"));
+                user.setAd(rs.getString("AdmissionDate"));
 
 //                Date dat = rs.getDate("AdmissionDate"));
 //                String date = String.valueOf(dat);

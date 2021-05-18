@@ -1,5 +1,6 @@
 package Controller;
 
+import Hashing.HashingPassword;
 import Model.Student;
 import Service.StudentService;
 
@@ -62,7 +63,7 @@ public class StudentServlet extends HttpServlet {
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
             if(pass.equals(cpass))  {
-                student.setStudentPass(pass);
+                student.setStudentPass(HashingPassword.hashPassword(pass));
             }else{
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/studentregister.jsp");
                 rd.forward(request, response);

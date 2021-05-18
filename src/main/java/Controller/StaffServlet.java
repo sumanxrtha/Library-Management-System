@@ -1,5 +1,6 @@
 package Controller;
 
+import Hashing.HashingPassword;
 import Model.Staff;
 import Service.StaffService;
 
@@ -56,7 +57,7 @@ public class StaffServlet extends HttpServlet {
             String pass = request.getParameter("password");
             String cpass = request.getParameter("cpassword");
             if(pass.equals(cpass))  {
-                staff.setStaffPass(pass);
+                staff.setStaffPass(HashingPassword.hashPassword(pass));
             }else{
                 RequestDispatcher rd = request.getRequestDispatcher("WebPages/RegisterPages/staffregister.jsp");
                 rd.forward(request, response);
